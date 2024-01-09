@@ -11,8 +11,8 @@ pygame.display.set_caption("Pong Game")
 ball_size = 10
 ball_x = width//2 - ball_size//2
 ball_y = height//2 - ball_size//2
-ball_speed_x = 0.3
-ball_speed_y = 0.3
+ball_speed_x = 0.5
+ball_speed_y = 0.5
 
 # Setup the paddles
 paddle_width = 20
@@ -37,8 +37,8 @@ while True:
             quit()
 
     # Make the ball move
-    ball_x += ball_speed_x
-    ball_y += ball_speed_y
+    ball_x = ball_x + ball_speed_x
+    ball_y = ball_y + ball_speed_y
 
     # Check for collision with paddles
     if ball_x < paddle1_x + paddle_width and ball_y + ball_size > paddle1_y and ball_y < paddle1_y + paddle_height:

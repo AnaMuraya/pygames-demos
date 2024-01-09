@@ -16,9 +16,16 @@ WHITE = (255, 255, 255)
 
 # Fruit images
 fruit_images = [
-    pygame.transform.scale(pygame.image.load(f"assets/image{1}.jpg").convert(), (100, 100)),
-    pygame.transform.scale(pygame.image.load(f"assets/image{2}.jpg").convert(), (100, 100)),
-    pygame.transform.scale(pygame.image.load(f"assets/image{3}.jpg").convert(), (100, 100))
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/apple.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/banana.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/berries.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/cherry.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/grape.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/orange.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/orange2.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/peach.png").convert(), (64, 64)),
+    pygame.transform.scale(pygame.image.load(f"fruitninja/assets/watermelon.png").convert(), (64, 64)),
+
 ]
 
 # Fruit class
@@ -69,7 +76,7 @@ while running:
     window.blit(text, (20, 20))
 
     # Spawn new fruits randomly
-    if random.randint(0, 100) < 3:
+    if random.randint(0, 100) < 9:
         fruit_image = random.choice(fruit_images)
         new_fruit = Fruit(fruit_image)
         fruit_group.add(new_fruit)

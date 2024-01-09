@@ -14,13 +14,9 @@ pygame.display.set_caption("Animal Drop Game")
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-#Background image
-background_image = pygame.image.load("glassAssets/background4.jpg")
-background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
-
 # Set up the glass
-glass_image = pygame.image.load("glassAssets/glass.png")
-broken_glass_image = pygame.image.load("glassAssets/brokenGlass.png")
+glass_image = pygame.image.load("glass/assets/glass.png")
+broken_glass_image = pygame.image.load("glass/assets/brokenGlass.png")
 glass_width = 100
 glass_height = 20
 glass_x = (WIDTH - glass_width) // 2
@@ -31,11 +27,11 @@ glass_speed = 5
 animals = []
 animal_weights = [10, 20, 30, 40, 50]
 animal_images = [
-    pygame.image.load("glassAssets/animal1.png"),
-    pygame.image.load("glassAssets/animal2.png"),
-    pygame.image.load("glassAssets/animal3.png"),
-    pygame.image.load("glassAssets/animal4.png"),
-    pygame.image.load("glassAssets/animal5.png")
+    pygame.image.load("glass/assets/animal1.png"),
+    pygame.image.load("glass/assets/animal2.png"),
+    pygame.image.load("glass/assets/animal3.png"),
+    pygame.image.load("glass/assets/animal4.png"),
+    pygame.image.load("glass/assets/animal5.png")
 ]
 animal_width = 100
 animal_height = 100
@@ -48,9 +44,6 @@ score = 0
 weight_limit = 100
 game_over = False
 weight_on_glass = 0
-time_limit = 30  # Time limit in seconds
-start_time = pygame.time.get_ticks()  # Get the start time of the game
-# animal_count_limit = 3
 
 # Load font
 font = pygame.font.Font(None, 36)
@@ -63,6 +56,10 @@ def spawn_animal():
     animal_y = 0
     animal_weight = random.choice(animal_weights)
     animals.append((animal_image, animal_x, animal_y, animal_weight))
+
+# def draw_glass():
+#     window.blit(glass_image, (glass_x, glass_y))
+#     # pygame.draw.rect(window, WHITE, (glass_x, glass_y, glass_width, glass_height))
 
 def draw_glass():
     if weight_on_glass > weight_limit:
@@ -118,11 +115,10 @@ def display_total_glass_weight():
     window.blit(weight_text, (10, 90))
 
 def check_collision():
-    global game_over, weight_on_glass, score
+    global game_over, weight_on_glass
 
     weight_on_glass = 0  # Reset the weight on glass for each iteration
-    current_score = 0  # Reset the current score for each iteration
-    
+
     for animal in animals:
         animal_x, animal_y = animal[1], animal[2]
         if (
@@ -134,18 +130,10 @@ def check_collision():
             )
         ):
             weight_on_glass += animal[3]
-            current_score += 1
 
     if weight_on_glass > weight_limit:
         game_over = True
-    else:
-        score = current_score
 
-def display_time():
-    elapsed_time = (pygame.time.get_ticks() - start_time) // 1000  # Calculate elapsed time in seconds
-    remaining_time = max(0, time_limit - elapsed_time)  # Calculate remaining time by subtracting elapsed time from the time limit
-    time_text = font.render("Time: " + str(remaining_time) + " seconds", True, WHITE)
-    window.blit(time_text, (10, 130))
 
 def game_loop():
     global game_over, last_spawn_time, score, glass_x  
@@ -161,7 +149,7 @@ def game_loop():
         if keys[pygame.K_RIGHT] and glass_x < WIDTH - glass_width:
             glass_x += glass_speed
 
-        window.blit(background_image, (0, 0))  # Blit the background image again before game over screen
+        window.fill(BLACK)
 
         if pygame.time.get_ticks() - last_spawn_time > animal_spawn_delay:
             spawn_animal()
@@ -174,15 +162,9 @@ def game_loop():
         display_score()
         display_weight()
         display_total_glass_weight()
-        display_time()
 
         pygame.display.update()
         clock.tick(60)
-
-        # Check if the time limit has been reached
-        elapsed_time = (pygame.time.get_ticks() - start_time) // 1000  # Calculate elapsed time in seconds
-        if elapsed_time >= time_limit:
-            game_over = True
 
         if game_over:
             # Pause for 3 seconds to show the broken glass image
@@ -192,12 +174,19 @@ def game_loop():
             window.fill(BLACK)
             game_over_text = font.render("Game Over", True, WHITE)
             final_score_text = font.render("Final Score: " + str(score), True, WHITE)
-            elapsed_time_text = font.render("Time: " + str(elapsed_time) + " seconds", True, WHITE)
             window.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2 - 50))
             window.blit(final_score_text, (WIDTH // 2 - 100, HEIGHT // 2))
-            window.blit(elapsed_time_text, (WIDTH // 2 - 100, HEIGHT // 2 + 50))
             pygame.display.update()
             pygame.time.wait(3000)
+
+    # Game over screen
+    # window.fill(BLACK)
+    # game_over_text = font.render("Game Over", True, WHITE)
+    # final_score_text = font.render("Final Score: " + str(score), True, WHITE)
+    # window.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2 - 50))
+    # window.blit(final_score_text, (WIDTH // 2 - 100, HEIGHT // 2))
+    # pygame.display.update()
+    # pygame.time.wait(3000)
 
     pygame.quit()
 

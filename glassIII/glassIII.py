@@ -13,12 +13,12 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 # Background image
-background_image = pygame.image.load("glassAssets/background1.jpg")
+background_image = pygame.image.load("glassIII/assets/background1.jpg")
 background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
 # Set up the glass
-glass_image = pygame.image.load("glassAssets/glass.png")
-broken_glass_image = pygame.image.load("glassAssets/brokenGlass.png")
+glass_image = pygame.image.load("glassIII/assets/glass.png")
+broken_glass_image = pygame.image.load("glassIII/assets/brokenGlass.png")
 glass_width = 100
 glass_height = 20
 glass_x = (WIDTH - glass_width) // 2
@@ -29,11 +29,11 @@ glass_speed = 5
 animals = []
 animal_weights = [10, 20, 30, 40, 50]
 animal_images = [
-    pygame.image.load("glassAssets/animal1.png"),
-    pygame.image.load("glassAssets/animal2.png"),
-    pygame.image.load("glassAssets/animal3.png"),
-    pygame.image.load("glassAssets/animal4.png"),
-    pygame.image.load("glassAssets/animal5.png")
+    pygame.image.load("glassIII/assets/animal1.png"),
+    pygame.image.load("glassIII/assets/animal2.png"),
+    pygame.image.load("glassIII/assets/animal3.png"),
+    pygame.image.load("glassIII/assets/animal4.png"),
+    pygame.image.load("glassIII/assets/animal5.png")
 ]
 animal_width = 100
 animal_height = 100

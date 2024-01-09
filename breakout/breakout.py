@@ -95,3 +95,5 @@ while running:
     pygame.display.flip()
 
 #Update the screen
+# ethanritho@gmail.com
+# w.muteria@gmail.com
